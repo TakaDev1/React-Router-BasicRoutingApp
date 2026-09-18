@@ -1,32 +1,114 @@
-# React + TypeScript + Vite
+# React-Router-BasicRoutingApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React Routerを使用して、HomeページとAboutページの基本的なルーティングを実装した練習用アプリです。
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+`BrowserRouter`、`Routes`、`Route`、`Link`を使用して、ページ間のルーティングとナビゲーションを実装しています。
 
-## React Compiler
+## 使用技術
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* TypeScript
+* React Router
+* Tailwind CSS
+* Vite
 
-## Expanding the Oxlint configuration
+## 機能
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+* Homeページの表示
+* Aboutページの表示
+* 共通ナビゲーション
+* Home → Aboutのページ遷移
+* About → Homeのページ遷移
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## ルーティング
+
+| URL      | コンポーネント | ページ   |
+| -------- | ------- | ----- |
+| `/`      | `Home`  | Home  |
+| `/about` | `About` | About |
+
+## ディレクトリ構成
+
+```text
+src/
+├── components/
+│   └── Navigation.tsx
+├── pages/
+│   ├── Home.tsx
+│   └── About.tsx
+├── App.tsx
+├── main.tsx
+└── index.css
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## React Routerの構成
+
+### BrowserRouter
+
+アプリケーション全体のルーティングを管理します。
+
+```tsx
+<BrowserRouter>
+  ...
+</BrowserRouter>
+```
+
+### Routes
+
+アプリケーションで使用するルートをまとめます。
+
+```tsx
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+</Routes>
+```
+
+### Route
+
+URLと表示するコンポーネントを対応付けます。
+
+```tsx
+<Route path="/" element={<Home />} />
+<Route path="/about" element={<About />} />
+```
+
+### Link
+
+ページを再読み込みせずに別のルートへ遷移します。
+
+```tsx
+<Link to="/">Home</Link>
+<Link to="/about">About</Link>
+```
+
+## Navigation
+
+共通ナビゲーションにはTailwind CSSを使用しています。
+
+```tsx
+<nav className="flex gap-4 p-4 bg-gray-100">
+  <Link to="/">Home</Link>
+  <Link to="/about">About</Link>
+</nav>
+```
+
+## 起動方法
+
+```bash
+npm install
+npm run dev
+```
+
+ブラウザで表示されたURLにアクセスしてください。
+
+## 学習ポイント
+
+* `BrowserRouter`によるルーティング管理
+* `Routes`と`Route`によるルート定義
+* `Link`によるページ遷移
+* 共通ナビゲーションの作成
+* React RouterとTypeScriptの組み合わせ
+* ページコンポーネントと共通コンポーネントの分離
